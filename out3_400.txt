@@ -1,0 +1,39 @@
+[[1.    0.587 0.585 ... 0.967 0.952 0.779]
+ [0.587 1.    0.119 ... 0.434 0.514 0.802]
+ [0.585 0.119 1.    ... 0.678 0.486 0.302]
+ ...
+ [0.967 0.434 0.678 ... 1.    0.958 0.64 ]
+ [0.952 0.514 0.486 ... 0.958 1.    0.65 ]
+ [0.779 0.802 0.302 ... 0.64  0.65  1.   ]]
+The kernel-target alignment for our dataset and random parameters is 0.466
+Step 25 - Alignment = 0.473
+Step 50 - Alignment = 0.477
+Step 75 - Alignment = 0.481
+Step 100 - Alignment = 0.483
+Step 125 - Alignment = 0.483
+Step 150 - Alignment = 0.481
+Step 175 - Alignment = 0.479
+Step 200 - Alignment = 0.484
+Step 225 - Alignment = 0.484
+Step 250 - Alignment = 0.485
+TRAINED parameters for 5 qubits, not full data:  [[[4.96532857 1.59400117 3.64722484]
+  [0.87897698 1.61489164 1.46613629]]
+
+ [[2.36439758 1.51807876 1.53417505]
+  [0.42352684 2.83549359 2.62821647]]
+
+ [[1.89949317 1.0234965  4.82740973]
+  [1.22877268 2.5368831  1.60740598]]
+
+ [[2.81664688 0.5433969  5.0606117 ]
+  [2.17225409 1.31035624 4.23114835]]
+
+ [[1.015207   1.65491209 6.42101991]
+  [2.93078443 5.97977313 0.82409214]]
+
+ [[4.85952584 0.38191022 1.28410515]
+  [3.62479514 3.01607117 2.66499876]]]
+The accuracy of a kernel with trained parameters and subset of data is 0.927
+The accuracy of a kernel with trained parameters and FULL data is 0.937
+runtime in min:  483.61756209929786
+The accuracy of a kernel on the test data is: 0.937

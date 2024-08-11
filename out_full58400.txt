@@ -1,0 +1,3 @@
+The training accuracy of the kernel with pre-trained parameters on the full data is 0.951
+runtime in min:  3210.143299225966
+The testing accuracy of a kernel with trained parameters is 0.941

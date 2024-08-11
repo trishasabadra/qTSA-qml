@@ -1,0 +1,40 @@
+The kernel value between the first and second datapoint is 0.672
+runtime in min:  4.849242007732391
+[[1.    0.672 0.691 ... 0.808 0.977 0.695]
+ [0.672 1.    0.272 ... 0.965 0.785 0.611]
+ [0.691 0.272 1.    ... 0.357 0.57  0.448]
+ ...
+ [0.808 0.965 0.357 ... 1.    0.906 0.652]
+ [0.977 0.785 0.57  ... 0.906 1.    0.693]
+ [0.695 0.611 0.448 ... 0.652 0.693 1.   ]]
+The kernel-target alignment for our dataset and random parameters is 0.407
+Step 25 - Alignment = 0.413
+Step 50 - Alignment = 0.427
+Step 75 - Alignment = 0.434
+Step 100 - Alignment = 0.438
+Step 125 - Alignment = 0.441
+Step 150 - Alignment = 0.440
+Step 175 - Alignment = 0.440
+Step 200 - Alignment = 0.440
+Step 225 - Alignment = 0.440
+Step 250 - Alignment = 0.438
+TRAINED parameters for 5 qubits, not full data:  [[[ 4.24139176  4.93357032  2.87529379]
+  [ 1.41987444  2.77327898  5.8436457 ]]
+
+ [[ 2.10672189  1.03678681 -0.109459  ]
+  [ 0.75805525  1.38447107  1.84921731]]
+
+ [[ 3.23513214  5.28145533  5.03112123]
+  [ 5.76903859  4.42593408  6.44964662]]
+
+ [[ 2.54353777  3.37783372  5.71721419]
+  [ 3.12649595  5.73358643  2.32175307]]
+
+ [[ 0.62106403  3.05485017  2.99257987]
+  [ 5.76990233  4.51187237  2.62306871]]
+
+ [[ 0.56898015  3.81677938  1.5286622 ]
+  [ 4.84751983  0.77525299  4.79306532]]]
+The accuracy of a kernel with trained parameters and subset of data is 0.915
+The accuracy of a kernel with trained parameters and FULL data is 0.911
+The accuracy of a kernel on the test data is: 0.911
