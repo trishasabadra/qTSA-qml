@@ -1,12 +1,8 @@
-
-
 # source: https://pennylane.ai/qml/demos/tutorial_kernels_module/
 # evaluate kernels, use them for classification and train them with gradient-based optimization
 # only for training full data on PRETRAINED parameters (for full code, including training parameters go to embed_qkernel_orig)
 
 from pennylane import numpy as np
-import matplotlib as mpl
-import matplotlib.pyplot as plt
 from sklearn.svm import SVC
 
 # LOAD DATA 
@@ -53,16 +49,8 @@ def kernel_circuit(x1, x2, params):
 def kernel(x1, x2, params):
     return kernel_circuit(x1, x2, params)[0] # kernel value = probabality of |000> (all-zero state)
 
-
-# In[20]:
-
-
 def accuracy(classifier, X, Y_target):
     return 1 - np.count_nonzero(classifier.predict(X) - Y_target) / len(Y_target)
-
-
-# In[21]:
-
 
 import time
 start = time.time()
@@ -94,11 +82,6 @@ print(f"The training accuracy of the kernel with pre-trained parameters on the f
 
 end = time.time()
 print("runtime in min: ", (end-start)/60)
-
-# PRINT MATRIX
-# K_init = qml.kernels.square_kernel_matrix(X, init_kernel, assume_normalized_kernel=True)
-# with np.printoptions(precision=3, suppress=True):
-#     print(K_init)
 
 # TEST DATA ACCURACY
 Xtest = np.loadtxt("testX.txt")
