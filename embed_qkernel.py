@@ -1,55 +1,3 @@
-
-import pennylane as qml
-
-def layer(x, params, wires, i0=0, inc=1):
-    """Building block of the embedding ansatz"""
-    i = i0
-    for j, wire in enumerate(wires):
-        qml.Hadamard(wires=[wire])
-        qml.RZ(x[i % len(x)], wires=[wire])
-        i += inc
-        qml.RY(params[0][j], wires=[wire])
-        # qml.RY(params[0, j], wires=[wire])
-
-    qml.broadcast(unitary=qml.CRZ, pattern="ring", wires=wires, parameters=params[1])
-    # qml.broadcast(unitary=qml.CRZ, pattern="chain", wires=wires, parameters=params[1])
-
-
-# To construct the ansatz, this layer is repeated multiple times, reusing
-# the datapoint `x` but feeding different variational parameters `params`
-# into each of them. Together, the datapoint and the variational
-# parameters fully determine the embedding ansatz $U(\boldsymbol{x})$. In
-# order to construct the full kernel circuit, we also require its adjoint
-# $U(\boldsymbol{x})^\dagger$, which we can obtain via `qml.adjoint`.
-# 
-
-# In[4]:
-
-
-def ansatz(x, params, wires):
-    """The embedding ansatz"""
-    for j, layer_params in enumerate(params):
-        layer(x, layer_params, wires, i0=j * len(wires))
-
-
-adjoint_ansatz = qml.adjoint(ansatz)
-
-
-def random_params(num_wires, num_layers):
-    """Generate random variational parameters in the shape for the ansatz."""
-    return np.random.uniform(0, 2 * np.pi, (num_layers, 2, num_wires), requires_grad=True)
-
-
-# Together with the ansatz we only need a device to run the quantum
-# circuit on. For the purpose of this tutorial we will use PennyLane\'s
-# `default.qubit` device with 5 wires in analytic mode.
-# 
-
-# In[5]:
-
-
-dev = qml.device("default.qubit", wires=3, shots=None)
-wires = dev.wires.tolist()
 from pennylane import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
@@ -57,7 +5,7 @@ import matplotlib.pyplot as plt
 import time
 start = time.time()
 
-# LOAD DATA
+# LOAD DATA 
 X_full = np.loadtxt("trainX.txt")
 Y_full = np.loadtxt("trainY.txt")
 # Y_train = np.where(Y == 0, -1.0, 1.0)
@@ -66,14 +14,14 @@ Y = Y_full[:400]
 
 # Defining a Quantum Embedding Kernel
 # ===================================
-#
+# 
 # PennyLane\'s [kernels
 # module](https://pennylane.readthedocs.io/en/latest/code/qml_kernels.html)
 # allows for a particularly simple implementation of Quantum Embedding
 # Kernels. The first ingredient we need for this is an *ansatz*, which we
 # will construct by repeating a layer as building block. Let\'s start by
 # defining this layer:
-#
+# 
 
 # In[5]:
 
@@ -100,6 +48,7 @@ def ansatz(x, params, wires):
 
 
 adjoint_ansatz = qml.adjoint(ansatz)
+
 
 def random_params(num_wires, num_layers):
     """Generate random variational parameters in the shape for the ansatz."""
@@ -159,7 +108,7 @@ def target_alignment(
     # Check if norm is zero to avoid division by zero
     if norm == 0:
         return inner_product
-
+    
     inner_product = inner_product / norm
 
     return inner_product
@@ -205,6 +154,7 @@ svm_trained = SVC(kernel=trained_kernel_matrix).fit(X, Y)
 
 acc_trained = accuracy(svm_trained, X, Y)
 print(f"The accuracy of a kernel with trained parameters and subset of data is {acc_trained:.3f}")
+
 
 accuracy_trained = accuracy(svm_trained, X_full, Y_full)
 print(f"The accuracy of a kernel with trained parameters and FULL data is {accuracy_trained:.3f}")
