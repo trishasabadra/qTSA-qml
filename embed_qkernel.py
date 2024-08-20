@@ -12,20 +12,6 @@ Y_full = np.loadtxt("trainY.txt")
 X = X_full[:400]
 Y = Y_full[:400]
 
-# Defining a Quantum Embedding Kernel
-# ===================================
-# 
-# PennyLane\'s [kernels
-# module](https://pennylane.readthedocs.io/en/latest/code/qml_kernels.html)
-# allows for a particularly simple implementation of Quantum Embedding
-# Kernels. The first ingredient we need for this is an *ansatz*, which we
-# will construct by repeating a layer as building block. Let\'s start by
-# defining this layer:
-# 
-
-# In[5]:
-
-
 import pennylane as qml
 
 def layer(x, params, wires, i0=0, inc=1):
@@ -117,7 +103,7 @@ def target_alignment(
 params = init_params
 opt = qml.AdamOptimizer(0.01)
 
-for i in range(250): # originally 500
+for i in range(200): # originally 500
     # Choose subset of datapoints to compute the KTA on.
     subset = np.random.choice(list(range(len(X))), 4)
     # Define the cost function for optimization
@@ -149,15 +135,15 @@ trained_kernel = lambda x1, x2: kernel(x1, x2, params)
 trained_kernel_matrix = lambda X1, X2: qml.kernels.kernel_matrix(X1, X2, trained_kernel)
 
 from sklearn.svm import SVC
-# Note that SVC expects the kernel argument to be a kernel matrix function.
-svm_trained = SVC(kernel=trained_kernel_matrix).fit(X, Y)
+# # Note that SVC expects the kernel argument to be a kernel matrix function.
+# svm_trained = SVC(kernel=trained_kernel_matrix).fit(X, Y)
 
-acc_trained = accuracy(svm_trained, X, Y)
-print(f"The accuracy of a kernel with trained parameters and subset of data is {acc_trained:.3f}")
+# acc_trained = accuracy(svm_trained, X, Y)
+# print(f"The accuracy of a kernel with trained parameters and subset of data is {acc_trained:.3f}")
 
 
-accuracy_trained = accuracy(svm_trained, X_full, Y_full)
-print(f"The accuracy of a kernel with trained parameters and FULL data is {accuracy_trained:.3f}")
+# accuracy_trained = accuracy(svm_trained, X_full, Y_full)
+# print(f"The accuracy of a kernel with trained parameters and FULL data is {accuracy_trained:.3f}")
 
 svm2 = SVC(kernel=trained_kernel_matrix).fit(X_full, Y_full)
 acc_full = accuracy(svm2, X_full, Y_full)
@@ -168,7 +154,7 @@ print("running time in min: ", (end-start)/60)
 
 
 # TEST DATA
-X_test = np.loadtxt("testX.txt")
-Y_test = np.loadtxt("testY.txt")
-accuracy_test = accuracy(svm_trained, X_test, Y_test)
-print(f"The accuracy of a kernel on the test data is: {accuracy_test:.3f}")
+# X_test = np.loadtxt("testX.txt")
+# Y_test = np.loadtxt("testY.txt")
+# accuracy_test = accuracy(svm_trained, X_test, Y_test)
+# print(f"The accuracy of a kernel on the test data is: {accuracy_test:.3f}")
